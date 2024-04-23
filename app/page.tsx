@@ -1,15 +1,30 @@
-import { createClient } from "@/utils/supabase/server";
 import Navbar from "@/components/Navbar";
 
 export default async function Index() {
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
+    <div className="flex-1 w-full flex flex-col items-center">
       <Navbar />
 
-      <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">
-        <main className="flex-1 flex flex-col gap-6">
-          <h2 className="font-bold text-4xl mb-4">Hello</h2>
-        </main>
+      <div className="hero h-[calc(100vh-4rem)] bg-base-200">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <img
+            src="https://www.uow.edu.au/assets/contributed/library/180430_MPA_UOWLibrary_0081-750x421.jpg"
+            width={480}
+            className="max-w-sm rounded-lg shadow-2xl"
+          />
+          <div>
+            <h1 className="text-5xl font-bold">
+              Welcome to
+              <br></br>
+              <span className="text-primary">UOW Room Booking</span>
+            </h1>
+            <p className="py-6">Please select your role to continue.</p>
+            <div className="join grid grid-cols-2 w-1/3">
+              <button className="join-item btn btn-outline">Student</button>
+              <button className="join-item btn btn-outline">Staff</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
