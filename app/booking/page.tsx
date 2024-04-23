@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 
 import { redirect } from "next/navigation";
 
-export default async function ProtectedPage() {
+export default async function Booking() {
   const supabase = createClient();
 
   const {
@@ -12,6 +12,16 @@ export default async function ProtectedPage() {
 
   if (!user) {
     return redirect("/login");
+  }
+
+  const { data: staff, error } = await supabase
+    .from("staff")
+    .select("is_staff")
+    .eq("id", user.id)
+    .single();
+
+  if (!staff?.is_staff) {
+    return redirect("/booking");
   }
 
   return (

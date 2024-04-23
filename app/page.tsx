@@ -1,3 +1,4 @@
+import HomeButton from "@/components/HomeButton";
 import Navbar from "@/components/Navbar";
 
 export default async function Index() {
@@ -18,11 +19,11 @@ export default async function Index() {
               <br></br>
               <span className="text-primary">UOW Room Booking</span>
             </h1>
-            <p className="py-6">Please select your role to continue.</p>
-            <div className="join grid grid-cols-2 w-1/3">
-              <button className="join-item btn btn-outline">Student</button>
-              <button className="join-item btn btn-outline">Staff</button>
-            </div>
+            <p className="pt-2 pb-6">
+              School room booking system made easier for students!
+            </p>
+            {/* <button className="btn btn-outline">Login</button> */}
+            <HomeButton />
           </div>
         </div>
       </div>
