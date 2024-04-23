@@ -20,8 +20,8 @@ export default async function Booking() {
     .eq("id", user.id)
     .single();
 
-  if (!staff?.is_staff) {
-    return redirect("/booking");
+  if (staff?.is_staff) {
+    return redirect("/dashboard");
   }
 
   return (

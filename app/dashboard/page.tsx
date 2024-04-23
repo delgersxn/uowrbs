@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 
 import { redirect } from "next/navigation";
 
-import EditRoomModal from "./componenets/EditRoomModal";
+import EditRoomModal from "./componenets/edit-room";
 
 export default async function Dashboard() {
   const supabase = createClient();
@@ -33,9 +33,15 @@ export default async function Dashboard() {
   return (
     <div className="flex-1 w-full flex flex-col items-center">
       <Navbar />
-      <div className="overflow-x-auto">
+
+      <div className="overflow-x-auto flex flex-col justify-center w-4/5 relative">
+        <div className="flex justify-center my-4 bg-base-300 p-2 rounded-xl">
+          <h2 className="font-bold text-2xl">Room list</h2>
+          <button className="btn btn-neutral btn-sm absolute right-2">
+            Create Room
+          </button>
+        </div>
         <table className="table">
-          {/* head */}
           <thead>
             <tr>
               <th>Room ID</th>
