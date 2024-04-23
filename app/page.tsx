@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import HomeButton from "@/components/HomeButton";
 import Navbar from "@/components/Navbar";
 
@@ -22,11 +23,11 @@ export default async function Index() {
             <p className="pt-2 pb-6">
               School room booking system made easier for students!
             </p>
-            {/* <button className="btn btn-outline">Login</button> */}
             <HomeButton />
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

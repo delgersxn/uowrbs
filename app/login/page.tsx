@@ -24,7 +24,7 @@ export default function Login({
   };
 
   return (
-    <div className=" h-[calc(100vh-4rem)] bg-base-200 flex items-center justify-center flex-1 w-full">
+    <div className="min-h-screen bg-base-200 flex items-center justify-center flex-1 w-full">
       <Link href="/" className="absolute left-8 top-8 btn btn-ghost">
         <svg
           xmlns="http://www.w3.org/2000/svg"
