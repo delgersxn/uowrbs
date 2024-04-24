@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { format } from "date-fns";
+import dayjs from "dayjs";
 
 import Navbar from "@/components/Navbar";
 import StaffButton from "../StaffButton";
@@ -65,7 +65,11 @@ export default async function StaffBookings() {
                   {booking.booking_date.startTime} -{" "}
                   {booking.booking_date.finishTime}
                 </td>
-                <td>{format(new Date(booking.booked_at), "dd/MM/yy HH:mm")}</td>
+                <td>
+                  {dayjs(new Date(booking.booked_at)).format(
+                    "YYYY/MM/DD HH:mm"
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

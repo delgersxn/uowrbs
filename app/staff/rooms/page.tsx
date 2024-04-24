@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { format } from "date-fns";
+import dayjs from "dayjs";
 
 import Navbar from "@/components/Navbar";
 import EditRoomModal from "./components/edit-room";
@@ -60,7 +60,9 @@ export default async function StaffRooms() {
                 <td>{room.name}</td>
                 <td>{room.location}</td>
                 <td>{room.capacity}</td>
-                <td>{format(new Date(room.created_at), "dd/MM/yy HH:mm")}</td>
+                <td>
+                  {dayjs(new Date(room.created_at)).format("YYYY/MM/DD HH:mm")}
+                </td>
                 <td className="flex  justify-end gap-2">
                   <EditRoomModal room={room} />
                   <DeleteRoomButton room={room} />
