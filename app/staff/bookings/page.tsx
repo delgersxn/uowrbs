@@ -23,7 +23,7 @@ export default async function StaffBookings() {
     .single();
 
   if (!staff?.is_staff) {
-    return redirect("/booking");
+    return redirect("/student/booking");
   }
 
   const { data: bookings, error: bookingsError } = await supabase

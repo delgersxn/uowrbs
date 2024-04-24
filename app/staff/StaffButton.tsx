@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default async function StaffButton() {
   return (
-    <div>
+    <div className="flex gap-2">
       <Link href="/staff/rooms" className="btn btn-sm">
         Rooms
       </Link>

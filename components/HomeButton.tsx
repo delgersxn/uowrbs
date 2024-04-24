@@ -9,7 +9,7 @@ export default async function HomeButton() {
   } = await supabase.auth.getUser();
 
   return user ? (
-    <Link href="/booking" className="btn btn-outline">
+    <Link href="/student/booking" className="btn btn-outline">
       Book a room
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -31,7 +31,7 @@
     "app/auth/callback/route.ts",
     "app/login/page.tsx",
     "app/login/submit-button.tsx",
-    "app/booking/page.tsx",
+    "app/student/page.tsx",
     "app/layout.tsx",
     "app/page.tsx",
     "components/SupabaseLogo.tsx",
