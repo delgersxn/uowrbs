@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import Datepicker from "react-tailwindcss-datepicker";
+import dayjs from "dayjs";
 
 const timeSlots = [
   {
@@ -28,11 +30,12 @@ const timeSlots = [
   },
 ];
 
-function TimePicker() {
+function TimePicker({ pickedDate }: any) {
   return (
     <div className="w-full grid grid-cols-3 gap-2">
       {timeSlots.map((slot) => (
         <input
+          key={slot.startTime}
           type="radio"
           name="time"
           aria-label={`${slot.startTime} - ${slot.finishTime}`}
@@ -43,9 +46,20 @@ function TimePicker() {
   );
 }
 
-export default function BookRoomModal({ roomName, roomId, userId }: any) {
+export default function BookRoomModal({ room, userId }: any) {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(roomName, roomId, userId);
+  const [pickDate, setPickDate] = useState({
+    startDate: dayjs(new Date()).format("YYYY-MM-DD").toString(),
+    endDate: dayjs(new Date()).format("YYYY-MM-DD").toString(),
+  });
+
+  //   console.log(dayjs(new Date()).format("YYYY/MM/DD").toString());
+
+  const handleValueChange = (newValue: any) => {
+    console.log("newValue:", newValue);
+    setPickDate(newValue);
+  };
+
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
@@ -61,10 +75,32 @@ export default function BookRoomModal({ roomName, roomId, userId }: any) {
         Book
       </button>
       <dialog className={`modal ${isOpen && "modal-open"}`}>
-        <div className="modal-box">
-          <h1 className="font-bold text-lg">Book {roomName}</h1>
-          <TimePicker />
-          <button className="btn mt-4" onClick={toggleModal}>
+        <div className="modal-box h-auto flex flex-col gap-4">
+          <h1 className="font-bold text-lg">Book {room.name}</h1>
+          <div className="">
+            <span className="label-text">Select booking date</span>
+            <Datepicker
+              primaryColor={"indigo"}
+              popoverDirection="down"
+              useRange={false}
+              asSingle={true}
+              minDate={new Date()}
+              maxDate={new Date(dayjs(new Date()).add(7, "day").toDate())}
+              value={pickDate}
+              onChange={handleValueChange}
+              displayFormat={"YYYY/MM/DD"}
+            />
+          </div>
+          <img
+            className="w-full h-48 object-cover rounded-lg"
+            src={room.image}
+            alt="Room"
+          />
+          <div>
+            <span className="label-text">Select booking time</span>
+            <TimePicker pickedDate={pickDate.startDate} />
+          </div>
+          <button className="btn" onClick={toggleModal}>
             Close
           </button>
         </div>
