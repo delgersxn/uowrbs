@@ -1,13 +1,14 @@
-import Navbar from "@/components/Navbar";
 import { createClient } from "@/utils/supabase/server";
-import { format } from "date-fns";
 import { redirect } from "next/navigation";
+import { format } from "date-fns";
 
-import EditRoomModal from "./componenets/edit-room";
-import CreateRoomModal from "./componenets/create-room";
-import DeleteRoomButton from "./componenets/delete-room";
+import Navbar from "@/components/Navbar";
+import EditRoomModal from "./components/edit-room";
+import CreateRoomModal from "./components/create-room";
+import DeleteRoomButton from "./components/delete-room";
+import StaffButton from "../StaffButton";
 
-export default async function Dashboard() {
+export default async function StaffRooms() {
   const supabase = createClient();
 
   const {
@@ -39,7 +40,7 @@ export default async function Dashboard() {
 
       <div className="overflow-x-auto flex flex-col justify-center w-4/5 relative">
         <div className="flex justify-center my-4 bg-base-300 p-2 rounded-xl">
-          <h2 className="font-bold text-2xl">Room list</h2>
+          <StaffButton />
           <CreateRoomModal />
         </div>
         <table className="table">

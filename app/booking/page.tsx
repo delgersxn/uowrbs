@@ -21,7 +21,7 @@ export default async function Booking() {
     .single();
 
   if (staff?.is_staff) {
-    return redirect("/dashboard");
+    return redirect("/staff/rooms");
   }
 
   return (

@@ -1,11 +1,19 @@
 "use client";
-
 import { useState, ChangeEvent } from "react";
-import { editRoom } from "../actions/edit-room";
+import { createRoom } from "../actions/create-room";
 
-export default function EditRoomModal({ room }: any) {
+interface Room {
+  name?: string;
+  location?: string;
+  capacity?: number;
+  image?: string;
+}
+
+const initialRoom = { name: "", location: "", capacity: 0, image: "" };
+
+export default function CreateRoomModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [updateRoom, setUpdateRoom] = useState(room);
+  const [newRoom, setNewRoom] = useState<Room>(initialRoom);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -15,56 +23,43 @@ export default function EditRoomModal({ room }: any) {
     event: ChangeEvent<HTMLInputElement>,
     inputName: string
   ) => {
-    setUpdateRoom({
-      ...updateRoom,
+    setNewRoom({
+      ...newRoom,
       [inputName]: event.target.value,
     });
   };
 
-  const isAnyValueChanged = Object.keys(updateRoom).some(
-    (inputName) => updateRoom[inputName] !== room[inputName]
+  const isAnyValueChanged = Object.keys(newRoom).some(
+    (inputName) => newRoom[inputName as keyof Room] != ""
   );
 
   const save = async () => {
-    await editRoom({ room: updateRoom });
-
+    await createRoom({ room: newRoom });
+    setNewRoom(initialRoom);
     toggleModal();
+    console.log(newRoom);
   };
 
   return (
     <>
-      <button className="btn btn-ghost btn-sm" onClick={toggleModal}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="icon icon-tabler icons-tabler-outline icon-tabler-edit"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-          <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-          <path d="M16 5l3 3" />
-        </svg>
+      <button
+        className="btn btn-neutral btn-sm absolute right-2"
+        onClick={toggleModal}
+      >
+        Create Room
       </button>
       <dialog className={`modal ${isOpen && "modal-open"}`}>
         <div className="modal-box">
-          <h3 className="font-bold text-lg">
-            Edit room <span className="badge badge-neutral">ID{room.id}</span>
-          </h3>
+          <h3 className="font-bold text-lg">Create Room</h3>
           <form className="form-control w-full ">
             <div className="label">
               <span className="label-text">Name</span>
             </div>
             <input
-              required
+              value={newRoom?.name}
+              required={isAnyValueChanged}
               type="text"
-              defaultValue={updateRoom.name}
+              placeholder="Type here"
               className="input input-bordered w-full "
               onChange={(e) => handleChange(e, "name")}
             />
@@ -72,10 +67,10 @@ export default function EditRoomModal({ room }: any) {
               <span className="label-text">Location</span>
             </div>
             <input
-              required
+              value={newRoom?.location}
+              required={isAnyValueChanged}
               type="text"
               placeholder="Type here"
-              defaultValue={updateRoom.location}
               className="input input-bordered w-full "
               onChange={(e) => handleChange(e, "location")}
             />
@@ -83,10 +78,10 @@ export default function EditRoomModal({ room }: any) {
               <span className="label-text">Capacity</span>
             </div>
             <input
-              required
+              value={newRoom?.capacity}
+              required={isAnyValueChanged}
               type="number"
-              placeholder="Type here"
-              defaultValue={updateRoom.capacity}
+              placeholder="Type number here"
               className="input input-bordered w-full "
               onChange={(e) => handleChange(e, "capacity")}
             />
@@ -94,17 +89,17 @@ export default function EditRoomModal({ room }: any) {
               <span className="label-text">Room Photo URL</span>
             </div>
             <input
-              required
+              value={newRoom?.image}
+              required={isAnyValueChanged}
               type="text"
-              placeholder="Type here"
-              defaultValue={updateRoom.image}
+              placeholder="Type URL here"
               className="input input-bordered w-full "
               onChange={(e) => handleChange(e, "image")}
             />
 
             {isAnyValueChanged ? (
               <button className="btn btn-primary mt-4" formAction={save}>
-                Save
+                Create
               </button>
             ) : (
               <button className="btn mt-4" onClick={toggleModal}>

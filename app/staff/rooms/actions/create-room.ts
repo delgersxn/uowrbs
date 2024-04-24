@@ -12,7 +12,7 @@ export async function createRoom({ room }: any) {
     return;
   }
 
-  revalidatePath("/dashboard");
+  revalidatePath("/staff/rooms");
 
   return { message: "Success" };
 }

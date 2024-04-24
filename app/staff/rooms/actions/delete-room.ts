@@ -12,7 +12,7 @@ export async function DeleteRoom(id: number) {
     return;
   }
 
-  revalidatePath("/dashboard");
+  revalidatePath("/staff/rooms");
 
   return { message: "Success" };
 }

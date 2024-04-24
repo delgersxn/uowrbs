@@ -20,7 +20,7 @@ export async function editRoom({ room }: any) {
     return;
   }
 
-  revalidatePath("/dashboard");
+  revalidatePath("/staff/rooms");
 
   return { message: "Success" };
 }

@@ -1,7 +1,7 @@
 "use client";
-
 import { useState } from "react";
 import { DeleteRoom } from "../actions/delete-room";
+
 export default function DeleteRoomButton({ room }: any) {
   const [isOpen, setIsOpen] = useState(false);
 
