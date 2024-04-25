@@ -1,9 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import dayjs from "dayjs";
-
 import Navbar from "@/components/Navbar";
 import StaffButton from "../StaffButton";
+import CancelBookingButton from "./components/cancel-booking";
 
 export default async function StaffBookings() {
   const supabase = createClient();
@@ -69,6 +69,9 @@ export default async function StaffBookings() {
                   {dayjs(new Date(booking.booked_at)).format(
                     "YYYY-MM-DD HH:mm"
                   )}
+                </td>
+                <td className="flex justify-end gap-2">
+                  <CancelBookingButton booking={booking} />
                 </td>
               </tr>
             ))}
