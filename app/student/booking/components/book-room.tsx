@@ -52,7 +52,7 @@ function TimePicker({
   );
 }
 
-export default function BookRoomModal({ room, userId }: any) {
+export default function BookRoomModal({ room, userId, userEmail }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [pickDate, setPickDate] = useState({
     startDate: dayjs(new Date()).format("YYYY-MM-DD").toString(),
@@ -77,6 +77,7 @@ export default function BookRoomModal({ room, userId }: any) {
       finishTime: pickedSlot?.finishTime,
       available: pickedSlot?.available,
       date: pickDate.startDate,
+      email: userEmail,
     });
     toggleModal();
   };

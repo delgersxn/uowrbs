@@ -104,7 +104,11 @@ export default async function MyBookings() {
                     </svg>
                     {room.capacity}
                   </p>
-                  <BookRoomModal room={room} userId={user.id} />
+                  <BookRoomModal
+                    room={room}
+                    userId={user.id}
+                    userEmail={user.email}
+                  />
                 </div>
               </div>
             </div>

@@ -59,8 +59,7 @@ export default async function StaffBookings() {
               <tr key={booking.id}>
                 <td>{truncateID(booking.id)}...</td>
                 <td>{booking.booked_room}</td>
-                {/* <td>{booking.booked_by_email}</td> */}
-                <td>get email n display here</td>
+                <td>{booking.email}</td>
                 <td>{booking.date}</td>
                 <td>
                   {booking.startTime} - {booking.finishTime}

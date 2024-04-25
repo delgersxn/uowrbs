@@ -9,6 +9,7 @@ export async function CreateBook({
   finishTime,
   available,
   date,
+  email,
 }: any) {
   const supabase = createClient();
 
@@ -22,6 +23,7 @@ export async function CreateBook({
           startTime: startTime,
           finishTime: finishTime,
           booked_by: userId,
+          email: email,
         },
       ])
       .select();
