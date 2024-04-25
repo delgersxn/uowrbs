@@ -43,15 +43,15 @@ export default function DeleteRoomButton({ room }: any) {
       <dialog className={`modal ${isOpen && "modal-open"}`}>
         <div className="modal-box">
           <h3 className="justify-center text-lg">
-            Are you sure want to delete room with{" "}
-            <span className="badge badge-neutral">ID{room.id}</span> ?
+            Are you sure want to delete room{" "}
+            <span className="badge badge-neutral">ID {room.id}</span> ?
           </h3>
           <div className="flex gap-2 justify-end mt-4">
             <button className="btn btn-error " onClick={confirmDelete}>
-              Delete
+              Yes
             </button>
             <button className="btn" onClick={toggleModal}>
-              Cancel
+              No
             </button>
           </div>
         </div>
