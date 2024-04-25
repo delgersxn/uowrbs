@@ -4,6 +4,7 @@ import Datepicker from "react-tailwindcss-datepicker";
 import dayjs from "dayjs";
 import { RetrieveSlots } from "../actions/retrieve-slots";
 import { set } from "date-fns";
+import { CreateBook } from "../actions/create-book";
 
 interface TimeSlot {
   startTime: string;
@@ -16,6 +17,7 @@ function TimePicker({
   pickedDate,
   pickedSlot,
   setPickedSlot,
+  isOpen,
 }: any) {
   // const [pickSlot, setPickSlot] = useState<TimeSlot>();
   const [slots, setSlots] = useState<TimeSlot[]>();
@@ -29,7 +31,7 @@ function TimePicker({
     };
     getSlots();
     setPickedSlot(undefined);
-  }, [pickedDate]);
+  }, [pickedDate, isOpen]);
 
   return (
     <div className="w-full grid grid-cols-3 gap-2">
@@ -70,6 +72,14 @@ export default function BookRoomModal({ room, userId }: any) {
 
   const book = async () => {
     // await editRoom({ room: updateRoom });
+    await CreateBook({
+      roomId: room.id,
+      userId: userId,
+      startTime: pickedSlot?.startTime,
+      finishTime: pickedSlot?.finishTime,
+      available: pickedSlot?.available,
+      date: pickDate.startDate,
+    });
     toggleModal();
   };
 
@@ -99,6 +109,8 @@ export default function BookRoomModal({ room, userId }: any) {
             />
           </div>
           <img
+            width="auto"
+            height="auto"
             className="w-full h-48 object-cover rounded-lg"
             src={room.image}
             alt="Room"
@@ -106,6 +118,7 @@ export default function BookRoomModal({ room, userId }: any) {
           <div>
             <span className="label-text">Select booking time</span>
             <TimePicker
+              isOpen={isOpen}
               pickedRoomId={room.id}
               pickedDate={pickDate.startDate}
               pickedSlot={pickedSlot}

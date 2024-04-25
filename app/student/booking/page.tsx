@@ -42,6 +42,8 @@ export default async function MyBookings() {
             <div className="card bg-base-100 shadow-xl" key={room.id}>
               <figure className="">
                 <img
+                  width="auto"
+                  height="auto"
                   className="w-full h-36 object-cover"
                   src={room.image}
                   alt="Room"

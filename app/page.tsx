@@ -12,6 +12,7 @@ export default async function Index() {
           <img
             src="https://www.uow.edu.au/assets/contributed/library/180430_MPA_UOWLibrary_0081-750x421.jpg"
             width={480}
+            height="auto"
             className="max-w-sm rounded-lg shadow-2xl"
           />
           <div>
