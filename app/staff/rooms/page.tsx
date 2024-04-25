@@ -56,7 +56,9 @@ export default async function StaffRooms() {
           <tbody>
             {rooms?.map((room) => (
               <tr key={room.id}>
-                <td>{room.id}</td>
+                <td>
+                  <div className="badge badge-neutral">ID {room.id}</div>
+                </td>
                 <td>{room.name}</td>
                 <td>{room.location}</td>
                 <td>{room.capacity}</td>

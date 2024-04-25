@@ -69,7 +69,6 @@ export default async function MyBookings() {
                     ID {booking.booked_room}
                   </div>
                 </td>
-
                 <td>{booking.date}</td>
                 <td>
                   {booking.startTime} - {booking.finishTime}

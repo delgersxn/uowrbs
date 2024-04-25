@@ -58,7 +58,11 @@ export default async function StaffBookings() {
             {bookings?.map((booking) => (
               <tr key={booking.id}>
                 <td>{truncateID(booking.id)}...</td>
-                <td>{booking.booked_room}</td>
+                <td>
+                  <div className="badge badge-neutral">
+                    ID {booking.booked_room}
+                  </div>
+                </td>
                 <td>{booking.email}</td>
                 <td>{booking.date}</td>
                 <td>
