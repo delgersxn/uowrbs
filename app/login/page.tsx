@@ -62,7 +62,7 @@ export default function Login({
               required
               type="text"
               className="grow"
-              placeholder="hello@uowmail.edu"
+              placeholder="student@uowmail.edu.au"
             />
           </label>
           <label className="input input-bordered flex items-center gap-2">
