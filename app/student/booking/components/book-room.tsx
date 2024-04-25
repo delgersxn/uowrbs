@@ -11,8 +11,13 @@ interface TimeSlot {
   available: boolean;
 }
 
-function TimePicker({ pickedRoomId, pickedDate }: any) {
-  const [pickSlot, setPickSlot] = useState<TimeSlot>();
+function TimePicker({
+  pickedRoomId,
+  pickedDate,
+  pickedSlot,
+  setPickedSlot,
+}: any) {
+  // const [pickSlot, setPickSlot] = useState<TimeSlot>();
   const [slots, setSlots] = useState<TimeSlot[]>();
   useEffect(() => {
     const getSlots = async () => {
@@ -23,7 +28,7 @@ function TimePicker({ pickedRoomId, pickedDate }: any) {
       setSlots(slots);
     };
     getSlots();
-    setPickSlot(undefined);
+    setPickedSlot(undefined);
   }, [pickedDate]);
 
   return (
@@ -34,9 +39,12 @@ function TimePicker({ pickedRoomId, pickedDate }: any) {
           key={slot.startTime}
           type="button"
           value={`${slot.startTime} - ${slot.finishTime}`}
-          className={`btn ${pickSlot === slot ? "btn-primary" : "btn-outline"}`}
+          className={`btn btn-outline ${
+            pickedSlot === slot ? "btn-primary" : ""
+          }`}
           onClick={() => {
-            setPickSlot(slot);
+            setPickedSlot(slot);
+            console.log(slot);
           }}
         />
       ))}
@@ -50,8 +58,9 @@ export default function BookRoomModal({ room, userId }: any) {
     startDate: dayjs(new Date()).format("YYYY-MM-DD").toString(),
     endDate: dayjs(new Date()).format("YYYY-MM-DD").toString(),
   });
+  const [pickedSlot, setPickedSlot] = useState<TimeSlot>();
 
-  const handleValueChange = (newValue: any) => {
+  const handleDateChange = (newValue: any) => {
     setPickDate(newValue);
   };
 
@@ -59,7 +68,7 @@ export default function BookRoomModal({ room, userId }: any) {
     setIsOpen(!isOpen);
   };
 
-  const save = async () => {
+  const book = async () => {
     // await editRoom({ room: updateRoom });
     toggleModal();
   };
@@ -85,7 +94,7 @@ export default function BookRoomModal({ room, userId }: any) {
               minDate={new Date()}
               maxDate={new Date(dayjs(new Date()).add(7, "day").toDate())}
               value={pickDate}
-              onChange={handleValueChange}
+              onChange={handleDateChange}
               displayFormat={"YYYY-MM-DD"}
             />
           </div>
@@ -99,11 +108,25 @@ export default function BookRoomModal({ room, userId }: any) {
             <TimePicker
               pickedRoomId={room.id}
               pickedDate={pickDate.startDate}
+              pickedSlot={pickedSlot}
+              setPickedSlot={setPickedSlot}
+              // onChange={handleSlotChange}
             />
           </div>
-          <button className="btn" onClick={toggleModal}>
-            Close
-          </button>
+          <div
+            className={`grid gap-2 ${
+              pickedSlot ? "grid-cols-2" : "grid-cols-1"
+            }`}
+          >
+            <button className="btn" onClick={toggleModal}>
+              Close
+            </button>
+            {pickedSlot && (
+              <button className="btn btn-primary" onClick={book}>
+                Book
+              </button>
+            )}
+          </div>
         </div>
       </dialog>
     </>

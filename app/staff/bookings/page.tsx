@@ -60,14 +60,13 @@ export default async function StaffBookings() {
                 <td>{truncateID(booking.id)}...</td>
                 <td>{booking.booked_room}</td>
                 <td>{booking.booked_by_email}</td>
-                <td>{booking.booking_date.date}</td>
+                <td>{booking.date}</td>
                 <td>
-                  {booking.booking_date.startTime} -{" "}
-                  {booking.booking_date.finishTime}
+                  {booking.startTime} - {booking.finishTime}
                 </td>
                 <td>
                   {dayjs(new Date(booking.booked_at)).format(
-                    "YYYY/MM/DD HH:mm"
+                    "YYYY-MM-DD HH:mm"
                   )}
                 </td>
               </tr>
