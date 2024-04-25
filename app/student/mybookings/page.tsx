@@ -1,34 +1,20 @@
 import Navbar from "@/components/Navbar";
-import { createClient } from "@/utils/supabase/server";
+import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { redirect } from "next/navigation";
 import dayjs from "dayjs";
 import Link from "next/link";
 import CancelBookingButton from "./components/cancel-booking";
 
 export default async function MyBookings() {
-  const supabase = createClient();
+  const supabase = createSupabaseServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    return redirect("/login");
-  }
-
-  const { data: staff, error } = await supabase
-    .from("staff")
-    .select("is_staff")
-    .eq("id", user.id)
-    .single();
-
-  if (staff?.is_staff) {
-    return redirect("/staff/rooms");
-  }
-
   const { data: bookings, error: bookingsError } = await supabase
     .from("booking")
     .select("id,booked_room,date,startTime,finishTime,booked_at")
-    .eq("booked_by", user.id)
+    .eq("booked_by", user?.id)
     .order("id", { ascending: true });
 
   function truncateID(id: string) {

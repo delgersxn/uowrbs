@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { redirect } from "next/navigation";
 import dayjs from "dayjs";
 
@@ -9,25 +9,7 @@ import DeleteRoomButton from "./components/delete-room";
 import StaffButton from "../StaffButton";
 
 export default async function StaffRooms() {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/login");
-  }
-
-  const { data: staff, error: staffError } = await supabase
-    .from("staff")
-    .select("is_staff")
-    .eq("id", user.id)
-    .single();
-
-  if (!staff?.is_staff) {
-    return redirect("/student/booking");
-  }
+  const supabase = createSupabaseServerClient();
 
   const { data: rooms, error: roomsError } = await supabase
     .from("room")
