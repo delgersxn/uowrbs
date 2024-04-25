@@ -1,5 +1,5 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
+import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 
 interface TimeSlot {
   startTime: string;
@@ -71,7 +71,7 @@ function makeSlotsAvailable(slots: TimeSlot[], bookedSlots: BookedSlot[]) {
 }
 
 export async function RetrieveSlots({ roomid, date }: any) {
-  const supabase = createClient();
+  const supabase = createSupabaseServerClient();
 
   const { data: bookedSlots, error } = await supabase
     .from("booking")

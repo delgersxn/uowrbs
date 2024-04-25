@@ -1,5 +1,5 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
+import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { revalidatePath } from "next/cache";
 
 export async function CreateBook({
@@ -11,7 +11,7 @@ export async function CreateBook({
   date,
   email,
 }: any) {
-  const supabase = createClient();
+  const supabase = createSupabaseServerClient();
 
   if (available) {
     const { data, error } = await supabase

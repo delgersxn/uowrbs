@@ -1,9 +1,9 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
+import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { revalidatePath } from "next/cache";
 
 export async function createRoom({ room }: any) {
-  const supabase = createClient();
+  const supabase = createSupabaseServerClient();
 
   const { data, error } = await supabase.from("room").insert([room]).select();
 
