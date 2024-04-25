@@ -1,45 +1,43 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import dayjs from "dayjs";
+import { RetrieveSlots } from "../actions/retrieve-slots";
+import { set } from "date-fns";
 
-const timeSlots = [
-  {
-    startTime: "08:00",
-    finishTime: "10:00",
-  },
-  {
-    startTime: "10:00",
-    finishTime: "12:00",
-  },
-  {
-    startTime: "12:00",
-    finishTime: "14:00",
-  },
-  {
-    startTime: "14:00",
-    finishTime: "16:00",
-  },
-  {
-    startTime: "16:00",
-    finishTime: "18:00",
-  },
-  {
-    startTime: "18:00",
-    finishTime: "20:00",
-  },
-];
+interface TimeSlot {
+  startTime: string;
+  finishTime: string;
+  available: boolean;
+}
 
-function TimePicker({ pickedDate }: any) {
+function TimePicker({ pickedRoomId, pickedDate }: any) {
+  const [pickSlot, setPickSlot] = useState<TimeSlot>();
+  const [slots, setSlots] = useState<TimeSlot[]>();
+  useEffect(() => {
+    const getSlots = async () => {
+      const slots = await RetrieveSlots({
+        roomid: pickedRoomId,
+        date: pickedDate,
+      });
+      setSlots(slots);
+    };
+    getSlots();
+    setPickSlot(undefined);
+  }, [pickedDate]);
+
   return (
     <div className="w-full grid grid-cols-3 gap-2">
-      {timeSlots.map((slot) => (
+      {slots?.map((slot) => (
         <input
+          disabled={!slot.available}
           key={slot.startTime}
-          type="radio"
-          name="time"
-          aria-label={`${slot.startTime} - ${slot.finishTime}`}
-          className="btn btn-outline"
+          type="button"
+          value={`${slot.startTime} - ${slot.finishTime}`}
+          className={`btn ${pickSlot === slot ? "btn-primary" : "btn-outline"}`}
+          onClick={() => {
+            setPickSlot(slot);
+          }}
         />
       ))}
     </div>
@@ -53,10 +51,7 @@ export default function BookRoomModal({ room, userId }: any) {
     endDate: dayjs(new Date()).format("YYYY-MM-DD").toString(),
   });
 
-  //   console.log(dayjs(new Date()).format("YYYY/MM/DD").toString());
-
   const handleValueChange = (newValue: any) => {
-    console.log("newValue:", newValue);
     setPickDate(newValue);
   };
 
@@ -80,6 +75,9 @@ export default function BookRoomModal({ room, userId }: any) {
           <div className="">
             <span className="label-text">Select booking date</span>
             <Datepicker
+              inputClassName={
+                "input input-bordered input-neutral w-full text-base-content"
+              }
               primaryColor={"indigo"}
               popoverDirection="down"
               useRange={false}
@@ -88,7 +86,7 @@ export default function BookRoomModal({ room, userId }: any) {
               maxDate={new Date(dayjs(new Date()).add(7, "day").toDate())}
               value={pickDate}
               onChange={handleValueChange}
-              displayFormat={"YYYY/MM/DD"}
+              displayFormat={"YYYY-MM-DD"}
             />
           </div>
           <img
@@ -98,7 +96,10 @@ export default function BookRoomModal({ room, userId }: any) {
           />
           <div>
             <span className="label-text">Select booking time</span>
-            <TimePicker pickedDate={pickDate.startDate} />
+            <TimePicker
+              pickedRoomId={room.id}
+              pickedDate={pickDate.startDate}
+            />
           </div>
           <button className="btn" onClick={toggleModal}>
             Close
