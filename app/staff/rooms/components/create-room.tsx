@@ -37,7 +37,7 @@ export default function CreateRoomModal() {
     await createRoom({ room: newRoom });
     setNewRoom(initialRoom);
     toggleModal();
-    console.log(newRoom);
+    // console.log(newRoom);
   };
 
   return (

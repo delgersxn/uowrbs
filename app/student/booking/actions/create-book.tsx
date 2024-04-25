@@ -12,8 +12,6 @@ export async function CreateBook({
 }: any) {
   const supabase = createClient();
 
-  //   const { data, error } = await supabase.from("room").insert([room]).select();
-
   if (available) {
     const { data, error } = await supabase
       .from("booking")
@@ -35,7 +33,7 @@ export async function CreateBook({
   } else {
     return { message: "Slot not available" };
   }
-  console.log({ roomId, userId, startTime, finishTime, date });
+  //   console.log({ roomId, userId, startTime, finishTime, date });
 
   revalidatePath("/student/booking");
 

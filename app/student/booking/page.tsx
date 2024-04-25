@@ -1,7 +1,8 @@
 import Navbar from "@/components/Navbar";
 import { createClient } from "@/utils/supabase/server";
-
 import { redirect } from "next/navigation";
+import Link from "next/link";
+
 import BookRoomModal from "./components/book-room";
 
 export default async function MyBookings() {
@@ -34,9 +35,17 @@ export default async function MyBookings() {
     <div className="flex-1 w-full flex flex-col items-center">
       <Navbar />
 
-      <div className="w-4/5 flex flex-col items-center">
-        <h1 className="text-4xl font-bold p-2">Student Room Booking</h1>
-
+      <div className="w-4/5 flex flex-col items-center justify-center relative">
+        <div className="flex justify-center my-4 bg-base-300 p-2 rounded-xl w-full">
+          <div className="flex gap-2">
+            <Link href="/student/booking" className="btn btn-sm">
+              Room Booking
+            </Link>
+            <Link href="/student/mybookings" className="btn btn-sm">
+              My Bookings
+            </Link>
+          </div>
+        </div>
         <div className="gap-4 grid grid-cols-4 w-full">
           {rooms?.map((room) => (
             <div className="card bg-base-100 shadow-xl" key={room.id}>

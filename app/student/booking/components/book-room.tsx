@@ -19,7 +19,6 @@ function TimePicker({
   setPickedSlot,
   isOpen,
 }: any) {
-  // const [pickSlot, setPickSlot] = useState<TimeSlot>();
   const [slots, setSlots] = useState<TimeSlot[]>();
   useEffect(() => {
     const getSlots = async () => {
@@ -46,7 +45,6 @@ function TimePicker({
           }`}
           onClick={() => {
             setPickedSlot(slot);
-            console.log(slot);
           }}
         />
       ))}
