@@ -79,7 +79,7 @@ export default async function MyBookings() {
                     "YYYY-MM-DD HH:mm"
                   )}
                 </td>
-                <td className="flex  justify-end gap-2">
+                <td className="flex justify-end gap-2">
                   <CancelBookingButton booking={booking} />
                 </td>
               </tr>
