@@ -7,7 +7,6 @@ import CancelBookingButton from "./components/cancel-booking";
 
 export default async function MyBookings() {
   const supabase = createClient();
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -28,7 +27,7 @@ export default async function MyBookings() {
 
   const { data: bookings, error: bookingsError } = await supabase
     .from("booking")
-    .select("*")
+    .select("id,booked_room,date,startTime,finishTime,booked_at")
     .eq("booked_by", user.id)
     .order("id", { ascending: true });
 
@@ -65,7 +64,12 @@ export default async function MyBookings() {
             {bookings?.map((booking) => (
               <tr key={booking.id}>
                 <td>{truncateID(booking.id)}...</td>
-                <td>{booking.booked_room}</td>
+                <td>
+                  <div className="badge badge-neutral">
+                    ID {booking.booked_room}
+                  </div>
+                </td>
+
                 <td>{booking.date}</td>
                 <td>
                   {booking.startTime} - {booking.finishTime}
