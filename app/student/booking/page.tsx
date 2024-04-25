@@ -79,8 +79,11 @@ export default async function MyBookings() {
                   </svg>
                   {room.location}
                 </p>
+                <div className="badge badge-neutral absolute left-2 top-2">
+                  ID {room.id}
+                </div>
                 <div className="card-actions justify-between">
-                  <p className="flex items-center gap-1">
+                  <p className="flex gap-1 items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
