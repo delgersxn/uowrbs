@@ -45,6 +45,7 @@ const slots: TimeSlot[] = [
   },
 ];
 
+// TODO Make time past slots unavailable
 function makeSlotsAvailable(slots: TimeSlot[], bookedSlots: BookedSlot[]) {
   slots.forEach((slot) => {
     // Assume slot is available initially
@@ -70,7 +71,7 @@ function makeSlotsAvailable(slots: TimeSlot[], bookedSlots: BookedSlot[]) {
   return slots;
 }
 
-export async function RetrieveSlots({ roomid, date }: any) {
+export async function retrieveSlots({ roomid, date }: any) {
   const supabase = createSupabaseServerClient();
 
   const { data: bookedSlots, error } = await supabase

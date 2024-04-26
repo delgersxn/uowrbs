@@ -1,6 +1,6 @@
 "use client";
 import { useState, ChangeEvent } from "react";
-import { editRoom } from "../../app/staff/rooms/actions/edit-room";
+import { editRoom } from "@/app/api/edit-room";
 
 export default function EditRoomModal({ room }: any) {
   const [isOpen, setIsOpen] = useState(false);

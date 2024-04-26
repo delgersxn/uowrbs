@@ -2,7 +2,8 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { revalidatePath } from "next/cache";
 
-export async function DeleteRoom(id: number) {
+// TODO Make sure only staff can delete room
+export async function deleteRoom(id: number) {
   const supabase = createSupabaseServerClient();
 
   const { error } = await supabase.from("room").delete().eq("id", id);

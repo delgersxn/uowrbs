@@ -1,6 +1,6 @@
 "use client";
 import { useState, ChangeEvent } from "react";
-import { createRoom } from "../../app/staff/rooms/actions/create-room";
+import { createRoom } from "@/app/api/create-room";
 
 interface Room {
   name?: string;

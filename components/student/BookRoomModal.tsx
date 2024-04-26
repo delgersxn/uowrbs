@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import dayjs from "dayjs";
-import { RetrieveSlots } from "../../app/student/booking/actions/retrieve-slots";
-import { CreateBook } from "../../app/student/booking/actions/create-book";
+import { retrieveSlots } from "@/app/api/retrieve-slots";
+import { createBooking } from "@/app/api/create-booking";
 
 interface TimeSlot {
   startTime: string;
@@ -21,7 +21,7 @@ function TimePicker({
   const [slots, setSlots] = useState<TimeSlot[]>();
   useEffect(() => {
     const getSlots = async () => {
-      const slots = await RetrieveSlots({
+      const slots = await retrieveSlots({
         roomid: pickedRoomId,
         date: pickedDate,
       });
@@ -68,8 +68,7 @@ export default function BookRoomModal({ room, userId, userEmail }: any) {
   };
 
   const book = async () => {
-    // await editRoom({ room: updateRoom });
-    await CreateBook({
+    await createBooking({
       roomId: room.id,
       userId: userId,
       startTime: pickedSlot?.startTime,

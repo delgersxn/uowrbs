@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { CancelBooking } from "../../app/student/my-bookings/actions/cancel-booking";
+import { cancelBooking } from "@/app/api/cancel-booking";
 
 export default function CancelBookingButton({ booking }: any) {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ export default function CancelBookingButton({ booking }: any) {
   };
 
   const confirmDelete = async () => {
-    await CancelBooking(booking.id);
+    await cancelBooking(booking.id);
     toggleModal();
   };
 

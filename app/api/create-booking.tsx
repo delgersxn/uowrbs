@@ -2,7 +2,7 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { revalidatePath } from "next/cache";
 
-export async function CreateBook({
+export async function createBooking({
   roomId,
   userId,
   startTime,

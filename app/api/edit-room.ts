@@ -2,10 +2,19 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { revalidatePath } from "next/cache";
 
-export async function createRoom({ room }: any) {
+// TODO Make sure only staff can edit room
+export async function editRoom({ room }: any) {
   const supabase = createSupabaseServerClient();
-
-  const { data, error } = await supabase.from("room").insert([room]).select();
+  const { id: roomId, name, location, capacity, image } = room;
+  const { data, error } = await supabase
+    .from("room")
+    .update({
+      name,
+      location,
+      capacity,
+      image,
+    })
+    .eq("id", roomId);
 
   if (error) {
     console.error("Error updating data", error);

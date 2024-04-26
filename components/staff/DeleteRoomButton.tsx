@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { DeleteRoom } from "../../app/staff/rooms/actions/delete-room";
+import { deleteRoom } from "@/app/api/delete-room";
 
 export default function DeleteRoomButton({ room }: any) {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ export default function DeleteRoomButton({ room }: any) {
   };
 
   const confirmDelete = async () => {
-    await DeleteRoom(room.id);
+    await deleteRoom(room.id);
     toggleModal();
   };
 

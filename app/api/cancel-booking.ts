@@ -2,7 +2,8 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { revalidatePath } from "next/cache";
 
-export async function CancelBooking(id: number) {
+// TODO Make sure only staff can cancel other id's booking
+export async function cancelBooking(id: number) {
   const supabase = createSupabaseServerClient();
 
   const { error } = await supabase.from("booking").delete().eq("id", id);
@@ -12,7 +13,7 @@ export async function CancelBooking(id: number) {
     return;
   }
 
-  revalidatePath("/student/my-bookings");
+  revalidatePath("/staff/bookings");
 
   return { message: "Success" };
 }

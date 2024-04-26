@@ -2,17 +2,18 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { revalidatePath } from "next/cache";
 
-export async function CancelBooking(id: number) {
+// TODO Make sure only staff can create room
+export async function createRoom({ room }: any) {
   const supabase = createSupabaseServerClient();
 
-  const { error } = await supabase.from("booking").delete().eq("id", id);
+  const { data, error } = await supabase.from("room").insert([room]).select();
 
   if (error) {
     console.error("Error updating data", error);
     return;
   }
 
-  revalidatePath("/staff/bookings");
+  revalidatePath("/staff/rooms");
 
   return { message: "Success" };
 }
