@@ -1,9 +1,8 @@
 import Navbar from "@/components/Navbar";
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
-import { redirect } from "next/navigation";
 import dayjs from "dayjs";
 import Link from "next/link";
-import CancelBookingButton from "./components/cancel-booking";
+import CancelBookingButton from "@/components/student/CancelBookingButton";
 
 export default async function MyBookings() {
   const supabase = createSupabaseServerClient();
@@ -31,7 +30,7 @@ export default async function MyBookings() {
             <Link href="/student/booking" className="btn btn-sm">
               Room Booking
             </Link>
-            <Link href="/student/mybookings" className="btn btn-sm">
+            <Link href="/student/my-bookings" className="btn btn-sm">
               My Bookings
             </Link>
           </div>

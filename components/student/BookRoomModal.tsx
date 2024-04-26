@@ -2,9 +2,8 @@
 import { useEffect, useState } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import dayjs from "dayjs";
-import { RetrieveSlots } from "../actions/retrieve-slots";
-import { set } from "date-fns";
-import { CreateBook } from "../actions/create-book";
+import { RetrieveSlots } from "../../app/student/booking/actions/retrieve-slots";
+import { CreateBook } from "../../app/student/booking/actions/create-book";
 
 interface TimeSlot {
   startTime: string;

@@ -1,12 +1,10 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
-import { redirect } from "next/navigation";
 import dayjs from "dayjs";
-
 import Navbar from "@/components/Navbar";
-import EditRoomModal from "./components/edit-room";
-import CreateRoomModal from "./components/create-room";
-import DeleteRoomButton from "./components/delete-room";
-import StaffButton from "../StaffButton";
+import EditRoomModal from "@/components/staff/EditRoomModal";
+import CreateRoomModal from "@/components/staff/CreateRoomButton";
+import DeleteRoomButton from "@/components/staff/DeleteRoomButton";
+import StaffMenuButton from "@/components/staff/StaffMenuButton";
 
 export default async function StaffRooms() {
   const supabase = createSupabaseServerClient();
@@ -22,7 +20,7 @@ export default async function StaffRooms() {
 
       <div className="overflow-x-auto flex flex-col justify-center w-4/5 relative">
         <div className="flex justify-center my-4 bg-base-300 p-2 rounded-xl">
-          <StaffButton />
+          <StaffMenuButton />
           <CreateRoomModal />
         </div>
         <table className="table">

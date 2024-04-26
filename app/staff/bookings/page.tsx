@@ -1,9 +1,8 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
-import { redirect } from "next/navigation";
 import dayjs from "dayjs";
 import Navbar from "@/components/Navbar";
-import StaffButton from "../StaffButton";
-import CancelBookingButton from "./components/cancel-booking";
+import StaffMenuButton from "@/components/staff/StaffMenuButton";
+import CancelBookingButton from "@/components/staff/CancelBookingButton";
 
 export default async function StaffBookings() {
   const supabase = createSupabaseServerClient();
@@ -23,7 +22,7 @@ export default async function StaffBookings() {
 
       <div className="overflow-x-auto flex flex-col justify-center w-4/5 relative">
         <div className="flex justify-center my-4 bg-base-300 p-2 rounded-xl">
-          <StaffButton />
+          <StaffMenuButton />
         </div>
         <table className="table">
           <thead>

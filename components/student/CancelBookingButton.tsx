@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { CancelBooking } from "../actions/cancel-booking";
+import { CancelBooking } from "../../app/student/my-bookings/actions/cancel-booking";
 
 export default function CancelBookingButton({ booking }: any) {
   const [isOpen, setIsOpen] = useState(false);

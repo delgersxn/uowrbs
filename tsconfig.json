@@ -5,11 +5,10 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -23,21 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "app/auth/callback/route.ts",
-    "app/login/page.tsx",
-    "app/login/submit-button.tsx",
-    "app/student/page.tsx",
-    "app/layout.tsx",
-    "app/page.tsx",
-    "components/SupabaseLogo.tsx",
-    "components/NextLogo.tsx",
-    "components/Header.tsx",
-    "components/DeployButton.tsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

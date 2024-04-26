@@ -1,9 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
-import { redirect } from "next/navigation";
 import Link from "next/link";
-
-import BookRoomModal from "./components/book-room";
+import BookRoomModal from "@/components/student/BookRoomModal";
 
 export default async function MyBookings() {
   const supabase = createSupabaseServerClient();
@@ -26,7 +24,7 @@ export default async function MyBookings() {
             <Link href="/student/booking" className="btn btn-sm">
               Room Booking
             </Link>
-            <Link href="/student/mybookings" className="btn btn-sm">
+            <Link href="/student/my-bookings" className="btn btn-sm">
               My Bookings
             </Link>
           </div>

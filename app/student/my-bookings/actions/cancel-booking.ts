@@ -12,7 +12,7 @@ export async function CancelBooking(id: number) {
     return;
   }
 
-  revalidatePath("/student/mybookings");
+  revalidatePath("/student/my-bookings");
 
   return { message: "Success" };
 }

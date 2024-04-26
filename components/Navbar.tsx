@@ -1,5 +1,5 @@
 import AuthButton from "./AuthButton";
-import logo from "./images/logo.png";
+import logo from "./images/Logo.png";
 import Image from "next/image";
 export default function Navbar() {
   return (
