@@ -54,12 +54,8 @@ function makeSlotsAvailable(slots: TimeSlot[], bookedSlots: BookedSlot[]) {
     // Check if the slot overlaps with any booked slot
     for (const bookedSlot of bookedSlots) {
       if (
-        (slot.startTime >= bookedSlot.startTime &&
-          slot.startTime < bookedSlot.finishTime) ||
-        (slot.finishTime > bookedSlot.startTime &&
-          slot.finishTime <= bookedSlot.finishTime) ||
-        (slot.startTime <= bookedSlot.startTime &&
-          slot.finishTime >= bookedSlot.finishTime)
+        slot.startTime == bookedSlot.startTime &&
+        slot.finishTime == bookedSlot.finishTime
       ) {
         // If there's an overlap, mark the slot as unavailable
         slot.available = false;

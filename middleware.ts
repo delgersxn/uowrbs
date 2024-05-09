@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
 
   const { data: staff } = await supabase
     .from("staff")
-    .select("is_staff")
+    .select("role")
     .eq("id", user?.id)
     .single();
 
@@ -38,14 +38,22 @@ export async function middleware(request: NextRequest) {
 
   // protects the "/staff" route and its sub-routes from non-staff users
   if (user && request.nextUrl.pathname.startsWith("/staff")) {
-    if (!staff?.is_staff) {
+    if (staff?.role !== "staff") {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
   // protects the "/student" route and its sub-routes from staff users
   if (user && request.nextUrl.pathname.startsWith("/student")) {
-    if (staff?.is_staff) {
+    if (staff?.role === "staff") {
       return NextResponse.redirect(new URL("/staff/rooms", request.url));
+    } else if (staff?.role === "admin") {
+      return NextResponse.redirect(new URL("/admin/rooms", request.url));
+    }
+  }
+
+  if (user && request.nextUrl.pathname.startsWith("/admin")) {
+    if (staff?.role !== "admin") {
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 
@@ -53,5 +61,11 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/student/:path*", "/staff/:path*", "/login/:path*"],
+  matcher: [
+    "/",
+    "/student/:path*",
+    "/staff/:path*",
+    "/login/:path*",
+    "/admin/:path*",
+  ],
 };

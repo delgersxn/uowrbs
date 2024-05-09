@@ -90,6 +90,17 @@ export default function EditRoomModal({ room }: any) {
               onChange={(e) => handleChange(e, "capacity")}
             />
             <div className="label">
+              <span className="label-text">Price</span>
+            </div>
+            <input
+              required
+              type="number"
+              placeholder="Type here"
+              defaultValue={updateRoom.price}
+              className="input input-bordered w-full "
+              onChange={(e) => handleChange(e, "price")}
+            />
+            <div className="label">
               <span className="label-text">Room Photo URL</span>
             </div>
             <input

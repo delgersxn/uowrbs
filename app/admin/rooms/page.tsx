@@ -1,10 +1,9 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import dayjs from "dayjs";
 import Navbar from "@/components/Navbar";
-import EditRoomModal from "@/components/staff/EditRoomModal";
-import CreateRoomModal from "@/components/staff/CreateRoomButton";
-import DeleteRoomButton from "@/components/staff/DeleteRoomButton";
-import StaffMenuButton from "@/components/staff/StaffMenuButton";
+import AdminMenuButton from "@/components/admin/AdminMenuButton";
+import ApproveRoomButton from "@/components/admin/ApproveRoomButton";
+import RefuseRoomButton from "@/components/admin/RefuseRoomButton";
 
 export default async function StaffRooms() {
   const supabase = createSupabaseServerClient();
@@ -20,8 +19,7 @@ export default async function StaffRooms() {
 
       <div className="overflow-x-auto flex flex-col justify-center w-4/5 relative">
         <div className="flex justify-center my-4 bg-base-300 p-2 rounded-xl">
-          <StaffMenuButton />
-          <CreateRoomModal />
+          <AdminMenuButton />
         </div>
         <table className="table">
           <thead>
@@ -33,13 +31,14 @@ export default async function StaffRooms() {
               <th>Price</th>
               <th>Status</th>
               <th>Created on</th>
+              <th>Created by</th>
             </tr>
           </thead>
           <tbody>
             {rooms?.map((room) => (
               <tr key={room.id}>
                 <td>
-                  <div className="badge badge-neutral">ID {room.id}</div>
+                  <div className="badge badge-neutral">ID{room.id}</div>
                 </td>
                 <td>{room.name}</td>
                 <td>{room.location}</td>
@@ -49,9 +48,17 @@ export default async function StaffRooms() {
                 <td>
                   {dayjs(new Date(room.created_at)).format("YYYY/MM/DD HH:mm")}
                 </td>
-                <td className="flex  justify-end gap-2">
-                  <EditRoomModal room={room} />
-                  <DeleteRoomButton room={room} />
+                <td>tchew@uow.edu.au</td>
+                <td>
+                  {room.approved ? (
+                    // delete btn?
+                    <></>
+                  ) : (
+                    <div className="flex  justify-end gap-2">
+                      <RefuseRoomButton room={room} />
+                      <ApproveRoomButton room={room} />
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}

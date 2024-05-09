@@ -2,12 +2,15 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { revalidatePath } from "next/cache";
 
-// TODO Make sure only staff can delete room
-// TODO What if there any bookings for the room?
-export async function deleteRoom(id: number) {
+// TODO Make sure only admin can approve room
+export async function approveRoom(id: number) {
   const supabase = createSupabaseServerClient();
 
-  const { error } = await supabase.from("room").delete().eq("id", id);
+  const { data, error } = await supabase
+    .from("room")
+    .update({ approved: true })
+    .eq("id", id)
+    .select();
 
   if (error) {
     console.error("Error updating data", error);

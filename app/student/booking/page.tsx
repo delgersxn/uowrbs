@@ -12,6 +12,7 @@ export default async function MyBookings() {
   const { data: rooms, error: roomsError } = await supabase
     .from("room")
     .select("*")
+    .eq("approved", true)
     .order("id", { ascending: true });
 
   return (
@@ -66,27 +67,50 @@ export default async function MyBookings() {
                   ID {room.id}
                 </div>
                 <div className="card-actions justify-between">
-                  <p className="flex gap-1 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="icon icon-tabler icons-tabler-outline icon-tabler-armchair"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M5 11a2 2 0 0 1 2 2v2h10v-2a2 2 0 1 1 4 0v4a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-4a2 2 0 0 1 2 -2z" />
-                      <path d="M5 11v-5a3 3 0 0 1 3 -3h8a3 3 0 0 1 3 3v5" />
-                      <path d="M6 19v2" />
-                      <path d="M18 19v2" />
-                    </svg>
-                    {room.capacity}
-                  </p>
+                  <div>
+                    <p className="flex gap-1 items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="icon icon-tabler icons-tabler-outline icon-tabler-armchair"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M5 11a2 2 0 0 1 2 2v2h10v-2a2 2 0 1 1 4 0v4a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-4a2 2 0 0 1 2 -2z" />
+                        <path d="M5 11v-5a3 3 0 0 1 3 -3h8a3 3 0 0 1 3 3v5" />
+                        <path d="M6 19v2" />
+                        <path d="M18 19v2" />
+                      </svg>
+                      {room.capacity}
+                    </p>
+                    <p className="flex gap-1 items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="icon icon-tabler icons-tabler-outline icon-tabler-currency-dollar-singapore"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M21 6h-4a3 3 0 0 0 0 6h1a3 3 0 0 1 0 6h-4" />
+                        <path d="M10 6h-4a3 3 0 1 0 0 6h1a3 3 0 0 1 0 6h-4" />
+                        <path d="M17 20v-2" />
+                        <path d="M18 6v-2" />
+                      </svg>
+                      {room.price}
+                    </p>
+                  </div>
                   <BookRoomModal
                     room={room}
                     userId={user?.id}

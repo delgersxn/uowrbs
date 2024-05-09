@@ -7,9 +7,16 @@ interface Room {
   location?: string;
   capacity?: number;
   image?: string;
+  price?: number;
 }
 
-const initialRoom = { name: "", location: "", capacity: 0, image: "" };
+const initialRoom = {
+  name: "",
+  location: "",
+  capacity: 0,
+  image: "",
+  price: 0,
+};
 
 export default function CreateRoomModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,6 +91,17 @@ export default function CreateRoomModal() {
               placeholder="Type number here"
               className="input input-bordered w-full "
               onChange={(e) => handleChange(e, "capacity")}
+            />
+            <div className="label">
+              <span className="label-text">Price</span>
+            </div>
+            <input
+              value={newRoom?.price}
+              required={isAnyValueChanged}
+              type="number"
+              placeholder="Type number here"
+              className="input input-bordered w-full "
+              onChange={(e) => handleChange(e, "price")}
             />
             <div className="label">
               <span className="label-text">Room Photo URL</span>
